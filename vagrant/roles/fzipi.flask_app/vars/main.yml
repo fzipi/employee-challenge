@@ -1,0 +1,6 @@
+---
+# vars file for fzipi.flask_app
+app_user: flask
+app_passwd: ohf5Io8IefoiKai9ahc5
+app_name: employees
+app_init: employees.run:app

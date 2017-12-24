@@ -1,0 +1,58 @@
+---
+- name: Create a new database with name 'employees'
+  mysql_db:
+    name: employees
+    state: present
+
+# Synchronization of src on the control machine to dest on the remote hosts
+- synchronize:
+    src: files/db
+    dest: /tmp
+
+# Synchronization of src on the control machine to dest on the remote hosts
+- synchronize:
+    src: files/app
+    dest: /
+
+- file:
+    path: /app
+    owner: www-data
+    group: www-data
+    recurse: yes
+    state: directory
+
+# Create database user with name and password with all database privileges
+# TODO: Right now permissions are broader that needed
+- mysql_user:
+    name: "{{ app_user }}"
+    password: "{{ app_passwd }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: Import employees database
+  mysql_db:
+    state: import
+    name: all
+    target: /tmp/db/employees.sql
+
+# Update apt packages
+#
+- name: General | Update apt packages
+  apt: update_cache=yes
+
+- name: Install required packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - python-pip
+    - virtualenv
+    - libmysqlclient-dev
+
+- name: Install flask application requirements
+  pip:
+    requirements: /app/requirements.txt
+
+- name: install gunicorn systemd unit file
+  template: src=gunicorn.j2 dest="/etc/systemd/system/gunicorn-{{ app_name }}.service"
+
+- name: "start {{ app_name }}"
+  systemd: state=started name="gunicorn-{{ app_name }}" daemon_reload=yes

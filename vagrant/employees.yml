@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+  roles:
+    - wtanaka.mysql
+    - jdauphant.nginx
+    - fzipi.flask_app
+  vars_files:
+    - vars/nginx.yml

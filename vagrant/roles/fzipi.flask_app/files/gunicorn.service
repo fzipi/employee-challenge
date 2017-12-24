@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=sammy
+Group=www-data
+WorkingDirectory=/app
+ExecStart=/usr/local/bin/gunicorn --access-logfile - --workers 3 --bind unix:/tmp/employees.sock employees.run:app
+
+[Install]
+WantedBy=multi-user.target

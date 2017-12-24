@@ -1,0 +1,15 @@
+flask
+flask-appconfig
+flask-bootstrap
+flask-nav
+flask-debug
+flask-wtf
+flask-testing
+nose
+coverage
+gunicorn
+argparse
+flask-reverse-proxy
+MySQL-python
+flask-mysqldb
+flask-table
