@@ -25,7 +25,7 @@ The summary for testing both approaches is:
 
 1. Clone this repository, and its submodules `git clone --recursive https://github.com/fzipi/employee-challenge.git`. It will take a while.
 3. Go to `docker` directory. Install `docker-compose` if you don't have it.
-   - Execute `docker-compose build` and `docker-compose up`. Go to `http://localhost` for testing the app.
+   - Execute `sudo docker-compose build` and `sudo docker-compose up`. Go to `http://localhost` for testing the app.
    - End the test with `Ctrl+C`.
 4. Go to `vagrant` directory. Install `vagrant` if you don't have it. 
    - Install required playbooks: `ansible-galaxy install -r requirements.yml --roles-path ./roles`
