@@ -1,0 +1,2 @@
+graft employee_list/templates
+graft employee_list/static
