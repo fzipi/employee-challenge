@@ -1,0 +1,8 @@
+[submodule "test_db_vagrant"]
+	path = vagrant/roles/fzipi.flask_app/files/db
+	url = https://github.com/fzipi/test_db.git
+	branch = challenge-vagrant
+[submodule "test_db_docker"]
+	path = docker/mysql/docker-entrypoint-initdb.d
+	url = https://github.com/fzipi/test_db.git
+	branch = challenge-docker
