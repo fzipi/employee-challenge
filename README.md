@@ -23,8 +23,7 @@ The former approach is described [here](docker/README.md), and the latter is [he
 
 The summary for testing both approaches is:
 
-1. Clone this repository. `git clone https://github.com/fzipi/challenge.git`
-2. Get the submodules: `cd challenge; git submodule init; git submodule update`
+1. Clone this repository, and its submodules `git clone --recursive https://github.com/fzipi/employee-challenge.git`. It will take a while.
 3. Go to `docker` directory. Install `docker-compose` if you don't have it.
    - Execute `docker-compose build` and `docker-compose up`. Go to `http://localhost` for testing the app.
    - End the test with `Ctrl+C`.
