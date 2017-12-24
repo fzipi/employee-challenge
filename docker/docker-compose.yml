@@ -1,0 +1,25 @@
+# DISCLAIMER:
+#
+# This is not a production environment, and in fact passwords need to be here
+# So don't blame me for being insecure :|
+
+db:
+  build: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=uef7aimu2eiRu5ceeloh
+    - MYSQL_USER=flask
+    - MYSQL_PASSWORD=ohf5Io8IefoiKai9ahc5
+    - MYSQL_DATABASE=employees
+    - MYSQL_INITDB_SKIP_TZINFO=true
+  ports:
+    - "3306:3306"
+  # as I'm working on Fedora, the last Z is for selinux
+  volumes:
+      - ./datadb:/var/lib/mysql:Z
+
+nginx:
+  links:
+    - db
+  build: nginx
+  ports:
+    - "80:80"
