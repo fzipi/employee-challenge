@@ -12,7 +12,7 @@ These repository contains the files for solving this challenge:
 
 After weighing the posibilities, I created the application using the Flask[^1] microframework for Python. Once the application was functional, it was time for the deployment phase. I followed two approaches:
 
- - Use `docker-compose`[^2] for orchestrating two containers, one with the database and the other with the Web and Application Server.
+ - Use `docker-compose`[^2] for orchestrating two containers, one with the database and the other with the Web and Application Server.  
   [Description here](docker/README.md)
  - Use `Vagrant`[^3] and create a VM with all the required services in it.  
    [Description here](vagrant/README.md)
