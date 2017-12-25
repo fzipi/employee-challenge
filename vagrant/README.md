@@ -1,23 +1,29 @@
 # Ansible and Vagrant Challenge
 
-Usually, for any playbook/module/cookbook, you need to evaluate the best option between support/downloads/documentation and your needs. I choose the roles from the galaxy that matched my needs; one for the mysql installation, and the other for the nginx server.
+For any playbook/module/cookbook you usually need to evaluate the best option between support/downloads/documentation and your needs. I chose the roles from the Ansible Galaxy[^1] that suited my needs: one for the MySQL installation, and the other for the Nginx server.
 
-I will be using `vagrant` in this example, with the ansible provider.
+In this example, I used Vagrant[^2] with the Ansible[^3] provider. I used Ansible version 2.4, which is what I have in my Fedora 27 Workstation.
 
-In this example, I am using `ansible` version 2.4, which is what I have in my Fedora 27 Workstation.
+The role I created, `fzipi.flask_app`, installs the application and provisions the data into the database. It is complemented by two roles from the Ansible Galaxy: `wtanaka.mysql` and `jdauphant.nginx`.
 
-The role I created, `fzipi.flask_app`, installs the application and provisions the data into the database. It will be complemented by two roles from the ansible galaxy: `wtanaka.mysql` and `jdauphant.nginx`. 
+To execute the Python-Flask application, I used the gunicorn[^4] uWSGI server. Additionally, I created a systemd service file for running the uWSGI service.
 
-For executing the Python-Flask application, I will use the `gunicorn` uWSGI server. Additionally, I created a systemd service file for running the uWSGIi service.
+To generate the Ubuntu 16.04 VM provisioned with MySQL, Nginx, and the Python-Flask App, execute:
+```
+sudo vagrant up
+```
+The `Vagrantfile` has these properties for the resulting VM to:
 
-You just need to execute `sudo vagrant up` for generating the ubuntu 16.04 VM provisioned with MySQL, nginx, and the python-flask App.
-
-Our `Vagrantfile` has these properties:
-
-- Based on the 'ubuntu/xenial64'.
-- Installs required roles from the galaxy.
-- Installs `python` needed for Ansible.
-- Provisions using ansible the needed services.
-- Configures a port forwarding from 8080 on the host, to port 80 on the guest. As you may have port 8080 already forwarded or in use, I've added `auto_correct: true` for the `config.vm.networ "forward_port"`, so at VM boot it will inform you about the free port mapping which has been chosen for the forwarding.
+- Be based on the 'ubuntu/xenial64'
+- Install required roles from the Galaxy
+- Install Python needed for Ansible
+- Provision using Ansible the needed services
+- Configure a port forwarding from 8080 on the host, to port 80 on the guest
+  As you may have port 8080 already forwarded or in use, I've added `auto_correct: true` for the `config.vm.networ "forward_port"`, so at VM boot it will inform you about the free port mapping chosen for the forwarding.
 
 Now you can [access the application](http://localhost:8080) on localhost port 8080 (or whatever port has been selected by the vagrant runtime).
+
+[^1]: https://galaxy.ansible.com/
+[^2]: https://www.vagrantup.com/
+[^3]: https://www.ansible.com/
+[^4]: http://gunicorn.org/
